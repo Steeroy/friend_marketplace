@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:friends_market/screens/get_started_screen.dart';
+import 'package:friends_market/screens/login_screen.dart';
 import 'package:friends_market/screens/splash_screen.dart';
-import 'package:friends_market/screens/user_type.dart';
 
 void main() {
   runApp(const MyApp());
@@ -15,7 +16,8 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       home: const SplashScreen(),
       routes: {
-        '/usertype': (context) => const UserType(),
+        '/get-started': (context) => const GetStartedScreen(),
+        '/login': (context) => const LoginScreen(),
       },
     );
   }
