@@ -5,16 +5,22 @@ import 'package:google_fonts/google_fonts.dart';
 import '../components/commons.dart';
 import '../constants/global_variables.dart';
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
+class RegisterScreen extends StatefulWidget {
+  const RegisterScreen({super.key});
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  State<RegisterScreen> createState() => _RegisterScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _RegisterScreenState extends State<RegisterScreen> {
   final TextEditingController emailController = TextEditingController();
+  final TextEditingController fullNameController = TextEditingController();
+  final TextEditingController businessNameController = TextEditingController();
+  final TextEditingController phoneNumberController = TextEditingController();
+  final TextEditingController locationController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
+  final TextEditingController roleController = TextEditingController();
+  String dropdownValue = 'merchant';
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +37,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 height: 80,
               ),
               Text(
-                "Sign In",
+                "Create new account",
                 style: GoogleFonts.nunito(
                   fontSize: 28,
                   fontWeight: FontWeight.w500,
@@ -46,7 +52,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const LabelText(
-                    text: "Email",
+                    text: "Full Name",
                   ),
                   const SizedBox(
                     height: 12,
@@ -55,10 +61,46 @@ class _LoginScreenState extends State<LoginScreen> {
                     height: 56,
                     child: CustomTextField(
                       type: 'text',
-                      hintText: "Enter your email",
-                      controller: emailController,
+                      hintText: "Enter your full name",
+                      controller: fullNameController,
                     ),
                   ),
+                  const SizedBox(
+                    height: 16,
+                  ),
+                  const LabelText(
+                    text: "Business Name",
+                  ),
+                  const SizedBox(
+                    height: 12,
+                  ),
+                  SizedBox(
+                    height: 56,
+                    child: CustomTextField(
+                      type: 'text',
+                      hintText: "Enter your business name",
+                      controller: businessNameController,
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 16,
+                  ),
+                  const LabelText(
+                    text: "Type of user",
+                  ),
+                  const SizedBox(
+                    height: 12,
+                  ),
+                  /*SizedBox(
+                    height: 56,
+                    child: CustomDropdownMenu(
+                      initialValue: dropdownValue,
+                      roleController: roleController,
+                      onChanged: (String newValue) {
+                        dropdownValue = newValue;
+                      },
+                    ),
+                  ),*/
                   const SizedBox(
                     height: 16,
                   ),

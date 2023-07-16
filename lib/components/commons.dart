@@ -66,39 +66,136 @@ class SecondaryButton extends StatelessWidget {
   }
 }
 
-class CustomTextField extends StatelessWidget {
-  final TextEditingController controller;
-  final String hintText;
+class InputBox extends StatelessWidget {
+  final String placeholderText;
+  final String type;
 
-  const CustomTextField({
+  const InputBox({
     Key? key,
-    required this.controller,
-    required this.hintText,
+    required this.placeholderText,
+    required this.type,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return TextField(
-      style: GoogleFonts.inter(
-          textStyle: const TextStyle(
-              color: Color(0xFF21371F),
-              fontSize: 14,
-              fontWeight: FontWeight.normal)),
-      controller: controller,
-      decoration: InputDecoration(
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(8),
-        ),
-        contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-        filled: true,
-        fillColor: GlobalVariables.TextBoxBg,
-        hintText: hintText,
-        hintStyle: const TextStyle(
-          fontSize: 14,
-          fontWeight: FontWeight.w400,
-        ),
+    return SizedBox(
+      height: 72,
+      child: TextField(
+        obscureText: type == 'text' ? false : true,
+        style: GoogleFonts.inter(
+            textStyle: const TextStyle(
+                color: Color(0xFF363636),
+                fontSize: 18,
+                fontWeight: FontWeight.normal,
+                letterSpacing: 1.0)),
+        decoration: InputDecoration(
+            contentPadding:
+                const EdgeInsets.symmetric(vertical: 12.0, horizontal: 12.0),
+            hintText: placeholderText,
+            border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(4),
+                borderSide:
+                    const BorderSide(color: Color(0xFF23E02A), width: 3)),
+            fillColor: const Color(0xFFF4F4F4),
+            filled: true,
+            focusedBorder: UnderlineInputBorder(
+                borderSide: const BorderSide(color: Colors.transparent),
+                borderRadius: BorderRadius.circular(4))),
       ),
     );
+  }
+}
+
+class CustomTextField extends StatefulWidget {
+  final TextEditingController controller;
+  final String hintText;
+  final String type;
+  const CustomTextField(
+      {super.key,
+      required this.controller,
+      required this.hintText,
+      required this.type});
+
+  @override
+  State<CustomTextField> createState() => _CustomTextFieldState();
+}
+
+class _CustomTextFieldState extends State<CustomTextField> {
+  bool _obscureText = true;
+  @override
+  Widget build(BuildContext context) {
+    if (widget.type == "text") {
+      return TextField(
+        obscureText: false,
+        enableSuggestions: false,
+        style: GoogleFonts.inter(
+            textStyle: const TextStyle(
+          color: GlobalVariables.HeadingText,
+          fontSize: 14,
+          fontWeight: FontWeight.normal,
+        )),
+        controller: widget.controller,
+        decoration: InputDecoration(
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(8),
+            borderSide: BorderSide.none,
+          ),
+          enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(8),
+            borderSide: BorderSide.none,
+          ),
+          contentPadding:
+              const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+          filled: true,
+          fillColor: GlobalVariables.TextBoxBg,
+          hintText: widget.hintText,
+          hintStyle: const TextStyle(
+            fontSize: 14,
+            fontWeight: FontWeight.w500,
+          ),
+        ),
+      );
+    } else {
+      return TextField(
+        obscureText: _obscureText,
+        enableSuggestions: false,
+        obscuringCharacter: "*",
+        style: GoogleFonts.inter(
+            textStyle: const TextStyle(
+          color: GlobalVariables.HeadingText,
+          fontSize: 14,
+          fontWeight: FontWeight.normal,
+        )),
+        controller: widget.controller,
+        decoration: InputDecoration(
+          suffixIcon: IconButton(
+            icon: Icon(_obscureText ? Icons.visibility : Icons.visibility_off),
+            onPressed: () {
+              setState(() {
+                _obscureText = !_obscureText;
+              });
+            },
+          ),
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(8),
+            borderSide: BorderSide.none,
+          ),
+          enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(8),
+            borderSide: BorderSide.none,
+          ),
+          contentPadding:
+              const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+          filled: true,
+          fillColor: GlobalVariables.TextBoxBg,
+          hintText: widget.hintText,
+          hintStyle: const TextStyle(
+            fontSize: 14,
+            fontWeight: FontWeight.w500,
+          ),
+        ),
+      );
+    }
   }
 }
 
@@ -114,10 +211,60 @@ class LabelText extends StatelessWidget {
     return Text(
       text,
       style: GoogleFonts.nunito(
-        fontSize: 16,
+        fontSize: 18,
         fontWeight: FontWeight.w500,
         color: GlobalVariables.HeadingText,
       ),
+    );
+  }
+}
+
+class CustomDropdownMenu extends StatelessWidget {
+  final String initialValue;
+  TextEditingController roleController;
+  final Function(String?) onChanged;
+  CustomDropdownMenu(
+      {super.key,
+      required this.initialValue,
+      required this.onChanged,
+      required this.roleController});
+
+  @override
+  Widget build(BuildContext context) {
+    return DropdownButtonFormField<String>(
+      value: initialValue,
+      onChanged: (String? newValue) {
+        if (newValue != null) {
+          onChanged(newValue);
+          roleController.text = newValue;
+        }
+      },
+      decoration: InputDecoration(
+        contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(8),
+          borderSide: BorderSide.none,
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(8),
+          borderSide: BorderSide.none,
+        ),
+        filled: true,
+        fillColor: GlobalVariables.TextBoxBg,
+        hintStyle: const TextStyle(
+          fontSize: 14,
+          fontWeight: FontWeight.w500,
+        ),
+      ),
+      style: GoogleFonts.nunito(
+        fontSize: 14,
+        fontWeight: FontWeight.w500,
+        color: GlobalVariables.HeadingText,
+      ),
+      items: const [
+        DropdownMenuItem<String>(value: 'merchant', child: Text("Merchant")),
+        DropdownMenuItem<String>(value: 'supplier', child: Text("Supplier")),
+      ],
     );
   }
 }

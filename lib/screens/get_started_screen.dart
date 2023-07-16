@@ -69,7 +69,7 @@ class GetStartedScreen extends StatelessWidget {
                   height: 56,
                   child: PrimaryButton(
                     onPressed: () {
-                      Navigator.pushNamed(context, '/usertype');
+                      Navigator.pushNamed(context, '/login');
                     },
                     text: "Get Started",
                   )),
