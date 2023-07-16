@@ -65,3 +65,59 @@ class SecondaryButton extends StatelessWidget {
     );
   }
 }
+
+class CustomTextField extends StatelessWidget {
+  final TextEditingController controller;
+  final String hintText;
+
+  const CustomTextField({
+    Key? key,
+    required this.controller,
+    required this.hintText,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return TextField(
+      style: GoogleFonts.inter(
+          textStyle: const TextStyle(
+              color: Color(0xFF21371F),
+              fontSize: 14,
+              fontWeight: FontWeight.normal)),
+      controller: controller,
+      decoration: InputDecoration(
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(8),
+        ),
+        contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+        filled: true,
+        fillColor: GlobalVariables.TextBoxBg,
+        hintText: hintText,
+        hintStyle: const TextStyle(
+          fontSize: 14,
+          fontWeight: FontWeight.w400,
+        ),
+      ),
+    );
+  }
+}
+
+class LabelText extends StatelessWidget {
+  final String text;
+  const LabelText({
+    super.key,
+    required this.text,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      text,
+      style: GoogleFonts.nunito(
+        fontSize: 16,
+        fontWeight: FontWeight.w500,
+        color: GlobalVariables.HeadingText,
+      ),
+    );
+  }
+}
