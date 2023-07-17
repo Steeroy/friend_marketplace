@@ -141,6 +141,31 @@ class SupplierProductScreen extends StatelessWidget {
                         )),
                   ])),
               const SizedBox(
+                height: 8,
+              ),
+              RichText(
+                  text: TextSpan(
+                      style: DefaultTextStyle.of(context).style,
+                      children: <TextSpan>[
+                    TextSpan(
+                      text: 'MOQ: ',
+                      style: GoogleFonts.nunito(
+                        decoration: TextDecoration.none,
+                        fontSize: 18,
+                        fontWeight: FontWeight.w400,
+                        color: GlobalVariables.HeadingText,
+                      ),
+                    ),
+                    TextSpan(
+                        text: '16',
+                        style: GoogleFonts.nunito(
+                          decoration: TextDecoration.none,
+                          fontSize: 18,
+                          fontWeight: FontWeight.w600,
+                          color: GlobalVariables.HeadingText,
+                        )),
+                  ])),
+              const SizedBox(
                 height: 16,
               ),
               Text(
