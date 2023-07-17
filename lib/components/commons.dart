@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:iconify_flutter/iconify_flutter.dart';
+import 'package:iconify_flutter/icons/mi.dart';
+import 'package:iconify_flutter/icons/ic.dart';
+import 'package:iconify_flutter/icons/mdi.dart';
 
 import '../constants/global_variables.dart';
 
@@ -29,6 +33,74 @@ class PrimaryButton extends StatelessWidget {
         text,
         style: GoogleFonts.inter(
             fontSize: 18, fontWeight: FontWeight.w600, color: Colors.white),
+      ),
+    );
+  }
+}
+
+class PrimaryIconButton extends StatelessWidget {
+  final VoidCallback onPressed;
+  final String text;
+  final Iconify icon;
+  const PrimaryIconButton({
+    super.key,
+    required this.onPressed,
+    required this.text,
+    required this.icon,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return TextButton.icon(
+      onPressed: onPressed,
+      icon: icon,
+      style: ButtonStyle(
+        backgroundColor:
+            MaterialStateProperty.all<Color>(const Color(0xFF007BFF)),
+        shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+          RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(40),
+          ),
+        ),
+      ),
+      label: Text(
+        text,
+        style: GoogleFonts.inter(
+            fontSize: 18, fontWeight: FontWeight.w600, color: Colors.white),
+      ),
+    );
+  }
+}
+
+class PrimaryIconRightButton extends StatelessWidget {
+  final VoidCallback onPressed;
+  final String text;
+  final Iconify icon;
+  const PrimaryIconRightButton({
+    super.key,
+    required this.onPressed,
+    required this.text,
+    required this.icon,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return TextButton.icon(
+      onPressed: onPressed,
+      label: Text(
+        text,
+        style: GoogleFonts.inter(
+            fontSize: 18, fontWeight: FontWeight.w600, color: Colors.white),
+      ),
+      icon: icon,
+      style: ButtonStyle(
+        backgroundColor:
+            MaterialStateProperty.all<Color>(const Color(0xFF007BFF)),
+        shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+          RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(40),
+          ),
+        ),
       ),
     );
   }
@@ -219,6 +291,7 @@ class LabelText extends StatelessWidget {
   }
 }
 
+// ignore: must_be_immutable
 class CustomDropdownMenu extends StatelessWidget {
   final String initialValue;
   TextEditingController roleController;
@@ -265,6 +338,162 @@ class CustomDropdownMenu extends StatelessWidget {
         DropdownMenuItem<String>(value: 'merchant', child: Text("Merchant")),
         DropdownMenuItem<String>(value: 'supplier', child: Text("Supplier")),
       ],
+    );
+  }
+}
+
+class SupplierItemCard extends StatelessWidget {
+  final String imageUrl;
+  final String itemName;
+  final String itemPrice;
+  final VoidCallback itemDetails;
+  final VoidCallback itemEdit;
+  const SupplierItemCard({
+    super.key,
+    required this.imageUrl,
+    required this.itemName,
+    required this.itemPrice,
+    required this.itemDetails,
+    required this.itemEdit,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Container(
+          width: 100,
+          height: 100,
+          decoration: BoxDecoration(
+              border: Border.all(color: GlobalVariables.HeadingText, width: 2),
+              borderRadius: BorderRadius.circular(16)),
+          child: Center(
+            child: Image.asset(
+              imageUrl,
+              width: 80,
+              height: 80,
+            ),
+          ),
+        ),
+        const SizedBox(
+          width: 24,
+        ),
+        Expanded(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              GestureDetector(
+                  onTap: itemDetails,
+                  child: Text(
+                    itemName,
+                    style: GoogleFonts.nunito(
+                        textStyle: const TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w500,
+                            color: GlobalVariables.PrimaryColor)),
+                  )),
+              const SizedBox(
+                height: 4,
+              ),
+              Text(itemPrice,
+                  style: GoogleFonts.nunito(
+                      textStyle: const TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600,
+                          color: GlobalVariables.HeadingText))),
+              const SizedBox(
+                height: 4,
+              ),
+              GestureDetector(
+                onTap: itemEdit,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    const Iconify(
+                      Mi.edit_alt,
+                      size: 18,
+                      color: GlobalVariables.SubHeadingText,
+                    ),
+                    const SizedBox(
+                      width: 4,
+                    ),
+                    Text(
+                      "Edit",
+                      style: GoogleFonts.nunito(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w500,
+                          color: GlobalVariables.HeadingText),
+                    )
+                  ],
+                ),
+              )
+            ],
+          ),
+        )
+      ],
+    );
+  }
+}
+
+class CustomBottomNavigationBar extends StatelessWidget {
+  final int currentIndex;
+  final ValueChanged<int> onTap;
+  const CustomBottomNavigationBar(
+      {super.key, required this.currentIndex, required this.onTap});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.zero,
+      width: double.infinity,
+      height: 72,
+      decoration: const BoxDecoration(
+        color: GlobalVariables.NavBoxBg,
+      ),
+      child: BottomNavigationBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        currentIndex: currentIndex,
+        onTap: onTap,
+        selectedItemColor: GlobalVariables.ActiveItem,
+        unselectedItemColor: GlobalVariables.NonActiveItem,
+        items: [
+          BottomNavigationBarItem(
+              icon: Iconify(
+                Ic.baseline_home,
+                size: 24,
+                color: currentIndex == 0
+                    ? GlobalVariables.ActiveItem
+                    : GlobalVariables.NonActiveItem,
+              ),
+              label: 'Home'),
+          BottomNavigationBarItem(
+              icon: Iconify(
+                Mdi.chart_bar,
+                size: 24,
+                color: currentIndex == 1
+                    ? GlobalVariables.ActiveItem
+                    : GlobalVariables.NonActiveItem,
+              ),
+              label: 'Dashboard'),
+          BottomNavigationBarItem(
+              icon: Iconify(
+                Mdi.account,
+                size: 24,
+                color: currentIndex == 2
+                    ? GlobalVariables.ActiveItem
+                    : GlobalVariables.NonActiveItem,
+              ),
+              label: 'Account')
+        ],
+        selectedLabelStyle: GoogleFonts.nunito(
+            textStyle:
+                const TextStyle(fontSize: 14, fontWeight: FontWeight.w500)),
+      ),
     );
   }
 }

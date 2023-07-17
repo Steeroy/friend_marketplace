@@ -3,8 +3,9 @@ import "package:google_fonts/google_fonts.dart";
 import 'package:iconify_flutter/iconify_flutter.dart';
 import 'package:iconify_flutter/icons/ph.dart';
 import 'package:iconify_flutter/icons/mi.dart';
-import 'package:iconify_flutter/icons/tabler.dart';
+import 'package:iconify_flutter/icons/gg.dart';
 
+import '../components/commons.dart';
 import "../constants/global_variables.dart";
 
 class SupplierHome extends StatefulWidget {
@@ -113,87 +114,56 @@ class _SupplierHomeState extends State<SupplierHome> {
                 ],
               ),
               const SizedBox(height: 32),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Container(
-                    width: 100,
-                    height: 100,
-                    decoration: BoxDecoration(
-                        border: Border.all(
-                            color: GlobalVariables.HeadingText, width: 2),
-                        borderRadius: BorderRadius.circular(16)),
-                    child: Center(
-                      child: Image.asset(
-                        'assets/images/superclean_1.png',
-                        width: 80,
-                        height: 80,
-                      ),
-                    ),
+              SupplierItemCard(
+                imageUrl: 'assets/images/superclean_1.png',
+                itemName: "Cleaner and Degreaser Combo",
+                itemPrice: "R300",
+                itemDetails: () {
+                  Navigator.pushNamed(context, '/supplier-product-screen');
+                },
+                itemEdit: () {},
+              ),
+              const SizedBox(
+                height: 24,
+              ),
+              SupplierItemCard(
+                imageUrl: 'assets/images/superclean_2.png',
+                itemName: "Cleaner",
+                itemPrice: "R86",
+                itemDetails: () {},
+                itemEdit: () {},
+              ),
+              const SizedBox(
+                height: 64,
+              ),
+              SizedBox(
+                width: double.infinity,
+                height: 56,
+                child: PrimaryIconButton(
+                  text: "Add Product",
+                  icon: const Iconify(
+                    Gg.add,
+                    size: 24,
+                    color: Colors.white,
                   ),
-                  const SizedBox(
-                    width: 24,
-                  ),
-                  Expanded(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        GestureDetector(
-                            onTap: () {},
-                            child: Text(
-                              "Cleaner and Degreaser Combo",
-                              style: GoogleFonts.nunito(
-                                  textStyle: const TextStyle(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w500,
-                                      color: GlobalVariables.PrimaryColor)),
-                            )),
-                        const SizedBox(
-                          height: 4,
-                        ),
-                        Text("R300",
-                            style: GoogleFonts.nunito(
-                                textStyle: const TextStyle(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w600,
-                                    color: GlobalVariables.HeadingText))),
-                        const SizedBox(
-                          height: 4,
-                        ),
-                        GestureDetector(
-                          onTap: () {},
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              const Iconify(
-                                Mi.edit_alt,
-                                size: 18,
-                                color: GlobalVariables.SubHeadingText,
-                              ),
-                              const SizedBox(
-                                width: 4,
-                              ),
-                              Text(
-                                "Edit",
-                                style: GoogleFonts.nunito(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w500,
-                                    color: GlobalVariables.HeadingText),
-                              )
-                            ],
-                          ),
-                        )
-                      ],
-                    ),
-                  )
-                ],
+                  onPressed: () {},
+                ),
               )
             ],
           ),
         ),
+      ),
+      bottomNavigationBar: CustomBottomNavigationBar(
+        currentIndex: 0,
+        onTap: (index) {
+          if (index == 0) {
+            Navigator.pushReplacementNamed(context, '/supplier-home');
+          } else if (index == 1) {
+            Navigator.pushReplacementNamed(context, '/supplier-dashboard');
+          } else if (index == 2) {
+            Navigator.pushReplacementNamed(context, '/supplier-account');
+          }
+        },
       ),
     ));
   }
