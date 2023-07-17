@@ -173,7 +173,10 @@ class _LoginScreenState extends State<LoginScreen> {
                                   Navigator.pushNamed(context, '/register');
                                 }),
                         ])),
-                  )
+                  ),
+                  const SizedBox(
+                    height: 48,
+                  ),
                 ],
               )
             ],

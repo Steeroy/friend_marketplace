@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:friends_market/screens/get_started_screen.dart';
 import 'package:friends_market/screens/login_screen.dart';
+import 'package:friends_market/screens/merchant_home.dart';
 import 'package:friends_market/screens/register_page.dart';
 import 'package:friends_market/screens/splash_screen.dart';
+import 'package:friends_market/screens/supplier_home.dart';
 
 void main() {
   runApp(const MyApp());
@@ -20,6 +22,8 @@ class MyApp extends StatelessWidget {
         '/get-started': (context) => const GetStartedScreen(),
         '/login': (context) => const LoginScreen(),
         '/register': (context) => const RegisterScreen(),
+        '/merchant-home': (context) => const MerchantHome(),
+        '/supplier-home': (context) => const SupplierHome(),
       },
     );
   }
