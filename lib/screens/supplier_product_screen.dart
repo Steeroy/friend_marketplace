@@ -198,7 +198,10 @@ class SupplierProductScreen extends StatelessWidget {
                     size: 24,
                     color: Colors.white,
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.pushNamed(
+                        context, '/supplier-edit-product-screen');
+                  },
                 ),
               )
             ],

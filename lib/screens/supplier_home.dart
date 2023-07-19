@@ -121,7 +121,9 @@ class _SupplierHomeState extends State<SupplierHome> {
                 itemDetails: () {
                   Navigator.pushNamed(context, '/supplier-product-screen');
                 },
-                itemEdit: () {},
+                itemEdit: () {
+                  Navigator.pushNamed(context, '/supplier-edit-product-screen');
+                },
               ),
               const SizedBox(
                 height: 24,
@@ -146,7 +148,10 @@ class _SupplierHomeState extends State<SupplierHome> {
                     size: 24,
                     color: Colors.white,
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.pushNamed(
+                        context, '/supplier-add-product-screen');
+                  },
                 ),
               )
             ],
