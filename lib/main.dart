@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:friends_market/screens/get_started_screen.dart';
 import 'package:friends_market/screens/login_screen.dart';
+import 'package:friends_market/screens/merchant_account_screen.dart';
+import 'package:friends_market/screens/merchant_cart_screen.dart';
+import 'package:friends_market/screens/merchant_category_screen.dart';
+import 'package:friends_market/screens/merchant_chat_screen.dart';
 import 'package:friends_market/screens/merchant_home.dart';
+import 'package:friends_market/screens/merchant_scanner_screen.dart';
 import 'package:friends_market/screens/register_page.dart';
 import 'package:friends_market/screens/splash_screen.dart';
 import 'package:friends_market/screens/supplier_account.dart';
@@ -29,6 +34,12 @@ class MyApp extends StatelessWidget {
         '/login': (context) => const LoginScreen(),
         '/register': (context) => const RegisterScreen(),
         '/merchant-home': (context) => const MerchantHome(),
+        '/merchant-scanner-screen': (context) => const MerchantScannerScreen(),
+        '/merchant-account-screen': (context) => const MerchantAccountScreen(),
+        '/merchant-cart-screen': (context) => const MerchantCartScreen(),
+        '/merchant-chat-screen': (context) => const MerchantChatScreen(),
+        '/merchant-category-screen': (context) =>
+            const MerchantCategoryScreen(),
         '/supplier-home': (context) => const SupplierHome(),
         '/supplier-dashboard': (context) => const SupplierDashboardScreen(),
         '/supplier-account': (context) => const SupplierAccountScreen(),
